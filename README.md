@@ -26,6 +26,106 @@ Repository Laporan Resmi Praktikum Jaringan Komputer Modul 2 Kelompok ITA01 Tahu
 * [Soal 16](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/#soal-16)
 * [Soal 17](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/#soal-17)
 
+# Soal 1
+WISE akan dijadikan sebagai DNS Master, Berlint akan dijadikan DNS Slave, dan Eden akan digunakan sebagai Web Server. Terdapat 2 Client yaitu SSS, dan Garden. Semua node terhubung pada router Ostania, sehingga dapat mengakses internet.
+
+## Analisa Soal
+Pada soal ini kita akan melakukan setting/konfigurasi IP Address pada setiap node agar nantinya setiap node dapat mengakses jaringan internet.
+
+## Pengerjaan Soal
+### Topologi
+Berikut adalah topologi jaringan untuk soal shift 2 yang kami buat:
+![Hasil topologi](images/1.1.png)<br>
+
+### Konfigurasi IP Address
+Berikut adalah konfigurasi IP untuk setiap node yang ada pada topologi kami.
+#### Ostania
+```
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet static
+        address 10.40.1.1
+        netmask 255.255.255.0
+
+auto eth2
+iface eth2 inet static
+       address 10.40.2.1
+       netmask 255.255.255.0
+
+auto eth3
+iface eth3 inet static
+       address 10.40.3.1
+       netmask 255.255.255.0
+```
+#### WISE
+```
+auto eth0
+iface eth0 inet static
+       address 10.40.2.2
+       netmask 255.255.255.0
+       gateway 10.40.2.1
+```
+#### SSS
+```
+auto eth0
+iface eth0 inet static
+       address 10.40.1.2
+       netmask 255.255.255.0
+       gateway 10.40.1.1
+```
+#### Garden
+```
+auto eth0
+iface eth0 inet static
+       address 10.40.1.3
+       netmask 255.255.255.0
+       gateway 10.40.1.1
+```
+#### Berlint
+```
+auto eth0
+iface eth0 inet static
+       address 10.40.3.2
+       netmask 255.255.255.0
+       gateway 10.40.3.1
+```
+#### Eden
+```
+auto eth0
+iface eth0 inet static
+       address 10.40.3.3
+       netmask 255.255.255.0
+       gateway 10.40.3.1
+```
+Selain mengatur konfigurasi IP pada setiap node, kami juga menambahkan command iptables pada node Ostania
+```
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.40.0.0/16
+```
+Kemudian, pada setiap node selain Ostania, kami perlu menambahkan command berikut.
+```
+echo "nameserver 192.168.122.1" > /etc/resolv.conf
+```
+
+## Kendala
+Tidak ada
+
+## Dokumentasi Soal 1
+- Test dengan ```ping google.com```<br>
+### Ostania
+![Hasil soal 1](images/1.2.png)<br>
+### WISE
+![Hasil soal 1](images/1.3.png)<br>
+### SSS
+![Hasil soal 1](images/1.4.png)<br>
+### Garden
+![Hasil soal 1](images/1.5.png)<br>
+### Berlint
+![Hasil soal 1](images/1.6.png)<br>
+### Eden
+![Hasil soal 1](images/1.7.png)<br>
+
 # Soal 2 
 Untuk mempermudah mendapatkan informasi mengenai misi dari Handler, bantulah Loid membuat website utama dengan akses wise.yyy.com dengan alias www.wise.yyy.com pada folder wise
 
