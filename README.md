@@ -35,37 +35,45 @@ Pada soal ini kami diperintahkan untuk membuat konfigurasi webserver DocumentRoo
 ## Pengerjaan Soal
 ### Client SSS dan Garden
 Melakukan apt-get update serta menginstall lynx dengan command
-```apt-get update
+```sh
+apt-get update
 apt-get install dnsutils -y
-apt-get install lynx -y```
+apt-get install lynx -y
+```
 
 ### Server Eden
 Pada soal ini kami melakukan instalasi apache, php, dan openssl agar dapat melakukan download ke website https dengan command:
-```apt-get install apache2 -y
+```sh
+apt-get install apache2 -y
 service apache2 start
 apt-get install php -y
 apt-get install libapache2-mod-php7.0 -y
 apt-get install ca-certificates openssl -y
-apt-get install apache2-utils -y```
+apt-get install apache2-utils -y
+```
 
 kemudian kami membuat konfigurasi file DocumentRoot pada ```/etc/apache2/sites-available/wise.ita01.com.conf```.
-```<VirtualHost *:80>
+```sh
+<VirtualHost *:80>
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/wise.ita01.com
         ServerName wise.ita01.com
         ServerAlias www.wise.ita01.com
         ErrorLog \${APACHE_LOG_DIR}/error.log
         CustomLog \${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>```
+</VirtualHost>
+```
 
 Kemudian kami membuat directory root untuk server ```wise.ita01.com```, mengunduh file, membuka zip unduhan, menyalin isi file, dan mengaktifkan virtualhost dengan a2ensite.
-```mkdir /var/www/wise.ita01.com
+```sh
+mkdir /var/www/wise.ita01.com
 wget -c "https://drive.google.com/uc?export=download&id=1S0XhL9ViYN7TyCj2W66BNE$
 unzip /root/wise.zip
 cp -r /root/wise/. /var/www/wise.ita01.com
 a2ensite wise.ita01.com
 a2enmod rewrite
-service apache2 restart```
+service apache2 restart
+```
 ## Kendala
 Tidak ada.
 
@@ -82,7 +90,9 @@ Pada soal ini kami diperintahkan untuk dapat mengakses ```www.wise.yyy.com/index
 ## Pengerjaan Soal
 ### Server Eden
 Dalam script bash Eden, kami menambahkan command echo yang akan menambahkan sintaks ke dalam ```/etc/apache2/sites-available/wise.ita01.com.conf``` sebagai berikut.
-``` Alias "/home" "/var/www/wise.ita01.com/index.php/home"```
+```sh
+Alias "/home" "/var/www/wise.ita01.com/index.php/home"
+```
 Penggunaan Alias akan akan menerjemahkan direktori web ```/home``` menjadi ```/index.php/home```.
 
 ## Kendala
@@ -100,7 +110,8 @@ Soal ini mirip dengan soal nomor 8, hanya saja konfigurasi DocumentRoot kali ini
 ## Pengerjaan Soal
 ### Server Eden
 Kami membuat konfigurasi file DocumentRoot pada ```/etc/apache2/sites-available/wise.ita01.com.conf```.
-```<VirtualHost *:80>
+```sh
+<VirtualHost *:80>
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/eden.wise.ita01.com
         ServerName eden.wise.ita01.com
@@ -108,16 +119,19 @@ Kami membuat konfigurasi file DocumentRoot pada ```/etc/apache2/sites-available/
 
         ErrorLog \${APACHE_LOG_DIR}/error.log
         CustomLog \${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>```
+</VirtualHost>
+```
 
 Kemudian kami membuat directory root untuk server ```eden.wise.ita01.com```, mengunduh file, membuka zip unduhan, menyalin isi file dan mengaktifkan virtualhost dengan a2ensite.
-```mkdir /var/www/eden.wise.ita01.com
+```sh
+mkdir /var/www/eden.wise.ita01.com
 wget -c "https://drive.google.com/uc?export=download&id=1q9g6nM85bW5T9f5yoyXtDq$
 unzip /root/eden.wise.zip
 cp -r /root/eden.wise/. /var/www/eden.wise.ita01.com
 a2ensite eden.wise.ita01.com
 a2enmod rewrite
-service apache2 restart```
+service apache2 restart
+```
 
 ## Kendala
 Tidak ada.
@@ -133,11 +147,13 @@ Pada soal ini kami diminta membuat DirectoryListing pada /public.
 ## Pengerjaan Soal
 ### Server Eden
 Kami menambahkan konfigurasi pada file ```/etc/apache2/sites-available/eden.wise.ita01.com.conf``` agar dapat membuat directory listing sebagai berikut.
-```<Directory /var/www/eden.wise.ita01.com/public>
+```sh
+<Directory /var/www/eden.wise.ita01.com/public>
                 Options +Indexes
         </Directory>
 
-Alias "/public" "/var/www/eden.wise.ita01.com/public"```
+Alias "/public" "/var/www/eden.wise.ita01.com/public"
+```
 
 ## Kendala
 Tidak ada.
@@ -154,7 +170,8 @@ Pada soal ini kami diminta membuat agar webserver dapat melakukan redirect ke /e
 ## Pengerjaan Soal
 ### Server Eden
 Kami menambahkan konfigurasi dalam file ```/etc/apache2/sites-available/eden.wise.ita01.com.conf``` dan mengakses tag pada directory /public options + indexes pada /public dalam file tersebut yang telah dibuat pada soal 11 sebagai berikut.
-```#no 11
+```sh
+#no 11
 <Directory /var/www/eden.wise.ita01.com/public>
                 Options +Indexes
         </Directory>
@@ -163,7 +180,8 @@ ErrorDocument 404 /error/404.html
         ErrorDocument 500 /error/404.html
         ErrorDocument 502 /error/404.html
         ErrorDocument 503 /error/404.html
-        ErrorDocument 504 /error/404.html```
+        ErrorDocument 504 /error/404.html
+```
 
 Dan dilakukan restart apache menggunakan command ```service apache2 restart```.
 
@@ -182,7 +200,9 @@ Pada soal ini kami diperintahkan untuk dapat mengakses ``` www.eden.wise.yyy.com
 ## Pengerjaan Soal
 ### Server Eden
 Dalam script bash Eden, kami menambahkan command echo yang akan menambahkan sintaks ke dalam ```/etc/apache2/sites-available/eden.wise.ita01.com.conf``` sebagai berikut.
-``` Alias "/js" "/var/www/eden.wise.ita01.com/public/js"```
+```sh
+Alias "/js" "/var/www/eden.wise.ita01.com/public/js"
+```
 Penggunaan Alias akan akan menerjemahkan direktori web ```/js``` menjadi ```/public/js```.
 
 ## Kendala
