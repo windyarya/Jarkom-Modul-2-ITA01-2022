@@ -78,9 +78,224 @@ eden            IN      A       10.40.3.3       ; IP Eden
 www.eden        IN      CNAME   eden.wise.ita01.com.
 ```
 
+## Kendala
+Tidak ada
+
 ## Dokumentasi Soal 3
 - Test domain dengan ```ping eden.wise.ita01.com```<br>
 ![Hasil soal 3](images/3.png)<br>
+
+# Soal 4
+Buat juga reverse domain untuk domain utama
+
+## Analisa Soal
+Buat reverse domain untuk domain utama
+
+## Pengerjaan Soal
+- Edit file named.conf.local di WISE di /etc/bind/named.conf.local
+```
+zone "2.40.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/wise/2.40.10.in-addr.arpa";
+};
+```
+- Edit file 3.42.10.in-addr.arpa di  /etc/bind/wise
+```
+\$TTL   604800
+@       IN      SOA     wise.ita01.com. root.wise.ita01.com. (
+                        2022102501      ; Serial
+                        604800          ; Refresh
+                        86400           ; Retry
+                        2419200         ; Expire
+                        604800 )        ; Negative Cache TTL
+;
+2.40.10.in-addr.arpa.   IN      NS      wise.ita01.com.
+2                       IN      PTR     wise.ita01.com.
+```
+
+## Kendala
+Tidak ada
+
+## Dokumentasi Soal 4
+- Test domain dengan ```host -t PTR 10.40.2.2```<br>
+![Hasil soal 4](images/4.png)<br>
+
+# Soal 5
+Buat juga reverse domain untuk domain utama (4). Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama
+
+## Analisa Soal
+Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama
+
+## Pengerjaan Soal
+- Ketik nano /etc/bind/named.conf.local pada command WISE lalu isi seperti di bawah
+```
+zone "wise.ita01.com" {
+        type master;
+        notify yes;
+        also-notify {10.40.3.2;};
+        allow-transfer {10.40.3.2;};
+        file "/etc/bind/wise/wise.ita01.com";
+};
+
+zone "2.40.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/wise/2.40.10.in-addr.arpa";
+};
+```
+- Lakukan restart pada WISE
+```
+service bind9 stop
+```
+
+## Kendala
+Tidak ada
+
+## Dokumentasi Soal 5
+- Test domain dengan ```ping wise.ita01.com```<br>
+![Hasil soal 5](images/5.png)<br>
+
+# Soal 6
+Karena banyak informasi dari Handler, buatlah subdomain yang khusus untuk operation yaitu operation.wise.yyy.com dengan alias www.operation.wise.yyy.com yang didelegasikan dari WISE ke Berlint dengan IP menuju ke Eden dalam folder operation.
+
+## Analisa
+Membuat subdomain khusus untuk operation yaitu operation.wise.ita01.com dengan alias www.operation.wise.ita01.com yang didelegasikan dari WISE ke Berlint dengan IP menuju Eden dalam folder operation
+
+## Pengerjaan Soal
+- Edit file wise.ita01.com di /etc/bind/wise
+```
+\$TTL   604800
+@       IN      SOA     wise.ita01.com. root.wise.ita01.com. (
+                        2022102501      ; Serial
+                        604800          ; Refresh
+                        86400           ; Retry
+                        2419200         ; Expire
+                        604800 )        ; Negative Cache TTL
+;
+@               IN      NS      wise.ita01.com.
+@               IN      A       10.40.3.3       ; IP WISE
+www             IN      CNAME   wise.ita01.com.
+eden            IN      A       10.40.3.3       ; IP Eden
+www.eden        IN      CNAME   eden.wise.ita01.com.
+ns1             IN      A       10.40.3.2       ; IP Berlint
+operation       IN      NS      ns1
+```
+- Edit file named.conf.options di WISE /etc/bind
+```
+options {
+        directory \"/var/cache/bind\";
+
+        // If there is a firewall between you and nameservers you want
+        // to talk to, you may need to fix the firewall to allow multiple
+        // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+        // If your ISP provided one or more IP addresses for stable
+        // nameservers, you probably want to use them as forwarders.
+        // Uncomment the following block, and insert the addresses replacing
+        // the all-0's placeholder.
+
+        // forwarders {
+        //      0.0.0.0;
+        // };
+
+        //========================================================================
+        // If BIND logs error messages about the root key being expired,
+        // you will need to update your keys.  See https://www.isc.org/bind-keys
+        //========================================================================
+        //dnssec-validation auto;
+        allow-query{any;};
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};
+```
+- Edit file named.conf.local di Berlint /jarkom
+```
+zone "wise.ita01.com" {
+        type slave;
+        masters { 10.40.2.2; };
+        file "/var/lib/bind/wise.ita01.com";
+};
+
+zone "operation.wise.ita01.com" {
+        type master;
+        file "/etc/bind/operation/operation.wise.ita01.com";
+};
+```
+- Edit file named.conf.option di Berlint /jarkom
+```
+options {
+        directory \"/var/cache/bind\";
+        // If there is a firewall between you and nameservers you want
+        // to talk to, you may need to fix the firewall to allow multiple
+        // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+        // If your ISP provided one or more IP addresses for stable 
+        // nameservers, you probably want to use them as forwarders.  
+        // Uncomment the following block, and insert the addresses replacing 
+        // the all-0's placeholder.
+        // forwarders {
+        //      0.0.0.0;
+        // };
+        //========================================================================
+        // If BIND logs error messages about the root key being expired,
+        // you will need to update your keys.  See https://www.isc.org/bind-keys
+        //========================================================================
+        //dnssec-validation auto;
+        allow-query{any;};
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};
+```
+- Edit file operation.wise.ita01.com di Berlint /jarkom
+```
+\$TTL   604800
+@       IN      SOA     operation.wise.ita01.com.       root.operation.wise.ita01.com. (
+                        2022102501      ; Serial
+                        604800          ; Refresh
+                        86400           ; Retry
+                        2419200         ; Expire
+                        604800 )        ; Negative Cache TTL
+;
+@               IN      NS      operation.wise.ita01.com.
+@               IN      A       10.40.3.3
+www             IN      CNAME   operation.wise.ita01.com.
+```
+
+## kendala 
+Tidak ada
+
+## Dokumentasi Soal 6
+- Test domain dengan ```ping operation.wise.ita01.com```<br>
+![Hasil soal 6](images/6.png)<br>
+
+# Soal 7
+Untuk informasi yang lebih spesifik mengenai Operation Strix, buatlah subdomain melalui Berlint dengan akses strix.operation.wise.yyy.com dengan alias www.strix.operation.wise.yyy.com yang mengarah ke Eden.
+
+## Analisa Soal
+buat subdomain lewat Berlint dengan akses strix.operation.wise.ita01.com dengan alias www.strix.operation.wise.ita01.com yang mengarah ke Eden
+
+## Pengerjaan Soal
+Edit file operation.wise.ita01.com di /etc/bind/operation/operation.wise.ita01.com pada berlint
+```
+\$TTL   604800
+@       IN      SOA     operation.wise.ita01.com.       root.operation.wise.ita01.com. (
+                        2022102501      ; Serial
+                        604800          ; Refresh
+                        86400           ; Retry
+                        2419200         ; Expire
+                        604800 )        ; Negative Cache TTL
+;
+@               IN      NS      operation.wise.ita01.com.
+@               IN      A       10.40.3.3
+www             IN      CNAME   operation.wise.ita01.com.
+strix           IN      A       10.40.3.3
+www.strix       IN      CNAME   strix.operation.wise.ita01.com.
+```
+
+## kendala 
+Tidak ada
+
+## Dokumentasi Soal 7
+- Test domain dengan ```ping strix.operation.wise.ita01.com```<br>
+![Hasil soal 7](images/7.png)<br>
 
 # Soal 8
 Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver ```www.wise.yyy.com```. Pertama, Loid membutuhkan webserver dengan DocumentRoot pada ```/var/www/wise.yyy.com```.
