@@ -756,7 +756,7 @@ Jika dilihat ada command Redirect 301 yang artinya moved permanently ke `wise.it
 Tidak ada kendala
 
 ## Dokumentasi Soal 16
-- Testing `lynx strix.operation.wise.ita01.com:15000`
+- Testing `lynx http://10.40.3.3`
 
 ![Hasil soal 16](images/16.1.png)
 
