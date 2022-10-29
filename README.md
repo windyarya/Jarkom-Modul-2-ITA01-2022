@@ -79,7 +79,7 @@ Tidak ada.
 
 ## Dokumentasi Soal 8
 - Hasil Testing Soal 8 (```lynx wise.ita01.com```)<br>
-![Hasil soal 8a](images/8a.png)
+![Hasil soal 8a](images/8a.png)<br>
 ![Hasil soal 8a](images/8a.png)
 
 # Soal 9
@@ -101,7 +101,7 @@ Tidak Ada.
 
 ## Dokumentasi Soal 9
 - Hasil Testing Soal 9 (```lynx wise.ita01.com/home```)<br>
-![Hasil soal 9a](images/9a.png)
+![Hasil soal 9a](images/9a.png)<br>
 ![Hasil soal 9](images/9.png)
 
 # Soal 10
@@ -140,7 +140,7 @@ Tidak ada.
 
 ## Dokumentasi Soal 10
 - Hasil Testing Soal 10 (```lynx eden.wise.ita01.com ```)<br>
-![Hasil soal 10a](images/10a.png)
+![Hasil soal 10a](images/10a.png)<br>
 ![Hasil soal 10](images/10.png)
 
 # Soal 11
@@ -163,7 +163,7 @@ Tidak ada.
 
 ## Dokumentasi Soal 11
 - Hasil Testing Soal 11 (```lynx eden.wise.ita01.com/public```)<br>
-![Hasil soal 11a](images/11a.png)
+![Hasil soal 11a](images/11a.png)<br>
 ![Hasil soal 11](images/11.png)
 
 
@@ -194,7 +194,7 @@ Tidak ada.
 
 ## Dokumentasi Soal 12
 - Hasil Testing Soal 12 (```lynx eden.wise.ita01.com/hahaha```)<br>
-![Hasil soal 12a](images/12a.png)
+![Hasil soal 12a](images/12a.png)<br>
 ![Hasil soal 12](images/12.png)
 
 # Soal 13
@@ -215,5 +215,5 @@ Tidak ada.
 
 ## Dokumentasi Soal 13
 - Hasil Testing Soal 13 (```lynx eden.wise.ita01.com/js```)<br>
-![Hasil soal 13a](images/13a.png)
+![Hasil soal 13a](images/13a.png)<br>
 ![Hasil soal 13](images/13.png)
