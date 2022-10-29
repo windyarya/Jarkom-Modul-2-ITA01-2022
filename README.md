@@ -121,10 +121,10 @@ Tidak ada
 ![Hasil soal 4](images/4.png)<br>
 
 # Soal 5
-Buat juga reverse domain untuk domain utama (4). Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama
+Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama
 
 ## Analisa Soal
-Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama
+buat Berlint sebagai DNS Slave untuk domain utama
 
 ## Pengerjaan Soal
 - Ketik nano /etc/bind/named.conf.local pada command WISE lalu isi seperti di bawah
@@ -151,8 +151,10 @@ service bind9 stop
 Tidak ada
 
 ## Dokumentasi Soal 5
+- Stop dservice dengan ```service bind9 stop```<br>
+![Hasil soal 51](images/51.png)<br>
 - Test domain dengan ```ping wise.ita01.com```<br>
-![Hasil soal 5](images/5.png)<br>
+![Hasil soal 52](images/52.png)<br>
 
 # Soal 6
 Karena banyak informasi dari Handler, buatlah subdomain yang khusus untuk operation yaitu operation.wise.yyy.com dengan alias www.operation.wise.yyy.com yang didelegasikan dari WISE ke Berlint dengan IP menuju ke Eden dalam folder operation.
