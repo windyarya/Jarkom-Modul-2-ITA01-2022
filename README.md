@@ -7,7 +7,7 @@ Repository Laporan Resmi Praktikum Jaringan Komputer Modul 2 Kelompok ITA01 Tahu
 3. I Putu Windy Arya Sagita (5027201071)
 
 # Daftar Isi
-* [Daftar Isi](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/-/tree/main#daftar-isi)
+* [Daftar Isi](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022#daftar-isi)
 * [Soal 1](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/#soal-1)
 * [Soal 2](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/#soal-2)
 * [Soal 3](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/soal-3)
@@ -78,8 +78,9 @@ service apache2 restart
 Tidak ada.
 
 ## Dokumentasi Soal 8
-- Hasil Testing Soal 8 (```Lynx wise.ita01.com```)<br>
-![Hasil soal 8](images/8.png)
+- Hasil Testing Soal 8 (```lynx wise.ita01.com```)<br>
+![Hasil soal 8a](images/8a.png)
+![Hasil soal 8a](images/8a.png)
 
 # Soal 9
 Setelah itu, Loid juga membutuhkan agar url ```www.wise.yyy.com/index.php/home``` dapat menjadi menjadi ```www.wise.yyy.com/home```.
@@ -99,7 +100,8 @@ Penggunaan Alias akan akan menerjemahkan direktori web ```/home``` menjadi ```/i
 Tidak Ada.
 
 ## Dokumentasi Soal 9
-- Hasil Testing Soal 9 (```Lynx wise.ita01.com/home```)<br>
+- Hasil Testing Soal 9 (```lynx wise.ita01.com/home```)<br>
+![Hasil soal 9a](images/9a.png)
 ![Hasil soal 9](images/9.png)
 
 # Soal 10
@@ -137,7 +139,8 @@ service apache2 restart
 Tidak ada.
 
 ## Dokumentasi Soal 10
-- Hasil Testing Soal 10 (```Lynx eden.wise.ita01.com ```)<br>
+- Hasil Testing Soal 10 (```lynx eden.wise.ita01.com ```)<br>
+![Hasil soal 10a](images/10a.png)
 ![Hasil soal 10](images/10.png)
 
 # Soal 11
@@ -159,7 +162,8 @@ Alias "/public" "/var/www/eden.wise.ita01.com/public"
 Tidak ada.
 
 ## Dokumentasi Soal 11
-- Hasil Testing Soal 11 (```Lynx eden.wise.ita01.com/public```)<br>
+- Hasil Testing Soal 11 (```lynx eden.wise.ita01.com/public```)<br>
+![Hasil soal 11a](images/11a.png)
 ![Hasil soal 11](images/11.png)
 
 
@@ -189,7 +193,8 @@ Dan dilakukan restart apache menggunakan command ```service apache2 restart```.
 Tidak ada.
 
 ## Dokumentasi Soal 12
-- Hasil Testing Soal 12 (```Lynx eden.wise.ita01.com/hahaha```)<br>
+- Hasil Testing Soal 12 (```lynx eden.wise.ita01.com/hahaha```)<br>
+![Hasil soal 12a](images/12a.png)
 ![Hasil soal 12](images/12.png)
 
 # Soal 13
@@ -209,5 +214,6 @@ Penggunaan Alias akan akan menerjemahkan direktori web ```/js``` menjadi ```/pub
 Tidak ada.
 
 ## Dokumentasi Soal 13
-- Hasil Testing Soal 13 (```Lynx eden.wise.ita01.com/js```)<br>
+- Hasil Testing Soal 13 (```lynx eden.wise.ita01.com/js```)<br>
+![Hasil soal 13a](images/13a.png)
 ![Hasil soal 13](images/13.png)
