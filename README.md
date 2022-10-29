@@ -661,10 +661,15 @@ Saat mengerjakan sudah work, akan tetapi saat demo ternyata error karena kami lu
 
 ## Dokumentasi Soal 14
 - Testing `lynx strix.operation.wise.ita01.com:15000`
+
 ![Hasil soal 14](images/14.1.png)
+
 ![Hasil soal 14](images/14.2.png)
+
 - Testing `lynx strix.operation.wise.ita01.com:15500`
+
 ![Hasil soal 14](images/14.3.png)
+
 ![Hasil soal 14](images/14.4.png)
 
 # Soal 15
@@ -719,8 +724,11 @@ Pada saat pengerjaan sampai demo nomor 15 ini tidak work karena ternyata ada typ
 
 ## Dokumentasi Soal 15
 - Testing `lynx strix.operation.wise.ita01.com:15000`
+
 ![Hasil soal 15](images/15.1.png)
+
 ![Hasil soal 15](images/15.2.png)
+
 ![Hasil soal 15](images/15.3.png)
 
 # Soal 16
@@ -749,8 +757,11 @@ Tidak ada kendala
 
 ## Dokumentasi Soal 16
 - Testing `lynx strix.operation.wise.ita01.com:15000`
+
 ![Hasil soal 16](images/16.1.png)
+
 ![Hasil soal 15](images/16.2.png)
+
 ![Hasil soal 15](images/16.3.png)
 
 # Soal 17
@@ -818,7 +829,11 @@ Tidak ada kendala
 
 ## Dokumentasi Soal 17
 - Testing `lynx eden.wise.ita01.com/edenlalala.png`
+
 ![Hasil soal 17](images/17.1.png)
+
 ![Hasil soal 17](images/17.2.png)
+
 ![Hasil soal 17](images/17.3.png)
+
 ![Hasil soal 17](images/17.4.png)
