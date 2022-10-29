@@ -184,6 +184,7 @@ Kami menambahkan konfigurasi dalam file ```/etc/apache2/sites-available/eden.wis
       Options +Indexes
 </Directory>
 
+#no 12
 ErrorDocument 404 /error/404.html
 ErrorDocument 500 /error/404.html
 ErrorDocument 502 /error/404.html
