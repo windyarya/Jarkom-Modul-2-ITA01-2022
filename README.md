@@ -35,9 +35,7 @@ Pada soal ini kami diperintahkan untuk membuat konfigurasi webserver DocumentRoo
 ## Pengerjaan Soal
 ### Client SSS dan Garden
 Melakukan apt-get update serta menginstall lynx dengan command
-```apt-get update 
-apt-get install dnsutils -y 
-apt-get install lynx -y```
+```apt-get update apt-get install dnsutils -y apt-get install lynx -y```
 
 ### Server Eden
 Pada soal ini kami melakukan instalasi apache, php, dan openssl agar dapat melakukan download ke website https dengan command:
