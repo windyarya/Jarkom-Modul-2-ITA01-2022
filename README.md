@@ -49,16 +49,14 @@ apt-get install ca-certificates openssl -y
 apt-get install apache2-utils -y```
 
 kemudian kami membuat konfigurasi file DocumentRoot pada ```/etc/apache2/sites-available/wise.ita01.com.conf```.
-```
-<VirtualHost *:80>
+```<VirtualHost *:80>
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/wise.ita01.com
         ServerName wise.ita01.com
         ServerAlias www.wise.ita01.com
         ErrorLog \${APACHE_LOG_DIR}/error.log
         CustomLog \${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-```
+</VirtualHost>```
 
 Kemudian kami membuat directory root untuk server ```wise.ita01.com```, mengunduh file, membuka zip unduhan, menyalin isi file, dan mengaktifkan virtualhost dengan a2ensite.
 ```mkdir /var/www/wise.ita01.com
