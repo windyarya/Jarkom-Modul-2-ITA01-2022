@@ -26,6 +26,62 @@ Repository Laporan Resmi Praktikum Jaringan Komputer Modul 2 Kelompok ITA01 Tahu
 * [Soal 16](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/#soal-16)
 * [Soal 17](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/#soal-17)
 
+# Soal 2 
+Untuk mempermudah mendapatkan informasi mengenai misi dari Handler, bantulah Loid membuat website utama dengan akses wise.yyy.com dengan alias www.wise.yyy.com pada folder wise
+
+## Analisa Soal
+Membuat subdomain wise.ita01.com dengan alias www.wise.ita01.com
+
+## Pengerjaan Soal
+- Install bind di WISE dengan command `apt-get bind9 -y`
+- Edit file named.conf.local dengan menjalankan nano /etc/bind/named.conf.local dengan menambahkan 
+```
+zone "wise.ita01.com" {
+        type master;
+        file "/etc/bind/wise/wise.ita01.com";
+};
+```
+- Edit file resolv.conf di SSS /etc/resolv.conf
+```
+nameserver 10.40.3.2
+nameserver 192.168.122.1
+```
+
+## Kendala
+Tidak ada
+
+## Dokumentasi Soal 2
+- Test dengan ```ping wise.ita01.com```<br>
+![Hasil soal 2](images/2.png)<br>
+
+# Soal 3
+Setelah itu ia juga ingin membuat subdomain eden.wise.yyy.com dengan alias www.eden.wise.yyy.com yang diatur DNS-nya di WISE dan mengarah ke Eden
+
+## Analisa Soal
+kita membuat subdomain eden.wise.its05.com dengan alias www.eden.wise.ita01.com dengan mengatur DNS di WISEdan mengarah ke Eden.
+
+## Pengerjaan Soal
+kita membuat subdomain eden.wise.yyy.com dengan alias www.eden.wise.ita01.com yang diatur DNS-nya di WISE dan mengarah ke Eden
+```
+\$TTL   604800
+@       IN      SOA     wise.ita01.com. root.wise.ita01.com. (
+                        2022102501      ; Serial
+                        604800          ; Refresh
+                        86400           ; Retry
+                        2419200         ; Expire
+                        604800 )        ; Negative Cache TTL
+;
+@               IN      NS      wise.ita01.com.
+@               IN      A       10.40.3.3       ; IP WISE
+www             IN      CNAME   wise.ita01.com.
+eden            IN      A       10.40.3.3       ; IP Eden
+www.eden        IN      CNAME   eden.wise.ita01.com.
+```
+
+## Dokumentasi Soal 3
+- Test domain dengan ```ping eden.wise.ita01.com```<br>
+![Hasil soal 3](images/3.png)<br>
+
 # Soal 8
 Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver ```www.wise.yyy.com```. Pertama, Loid membutuhkan webserver dengan DocumentRoot pada ```/var/www/wise.yyy.com```.
 
