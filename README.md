@@ -7,6 +7,7 @@ Repository Laporan Resmi Praktikum Jaringan Komputer Modul 2 Kelompok ITA01 Tahu
 3. I Putu Windy Arya Sagita (5027201071)
 
 # Daftar Isi
+
 * [Daftar Isi](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022#daftar-isi)
 * [Soal 1](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/#soal-1)
 * [Soal 2](https://github.com/windyarya/Jarkom-Modul-2-ITA01-2022/#soal-2)
@@ -597,3 +598,227 @@ Tidak ada.
 ![Hasil soal 13a](images/13a.png)<br>
 - Hasil Testing Soal 13 <br>
 ![Hasil soal 13](images/13.png)
+
+# Soal 14
+Loid meminta agar www.strix.operation.wise.yyy.com hanya bisa diakses dengan port 15000 dan port 15500.
+## Analisa Soal
+Pada soal ini kami diperintahkan untuk mengkonfigurasi agar ```www.strix.operation.wise.ita01.com``` itu hanya bisa diakses melalui port 15000 dan 15500.
+
+## Pengerjaan Soal
+### Pada Server Eden
+Pertama, kami menambahkan konfigurasi virtual host dengan port 15000 dan 15500 untuk subdomain `strix.operation.wise.ita01.com` ke dalam file `/etc/apache2/sites-available/strix.operation.wise.ita01.com.conf`
+```sh
+<VirtualHost *:15000>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/strix.operation.wise.ita01.com
+        ServerName strix.operation.wise.ita01.com
+        ServerAlias www.strix.operation.wise.ita01.com
+
+        ErrorLog \${APACHE_LOG_DIR}/error.log
+        CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+<VirtualHost *:15500>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/strix.operation.wise.ita01.com
+        ServerName strix.operation.wise.ita01.com
+        ServerAlias www.strix.operation.wise.ita01.com
+
+        ErrorLog \${APACHE_LOG_DIR}/error.log
+        CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+Setelah itu, kita download resource soal untuk subdomain `strix.operation.wise.ita01.com` dan lakukan langkah ekstraksi dan jika sudah bisa melakukan restart bind9.
+```sh
+mkdir /var/www/strix.operation.wise.ita01.com
+wget -c "https://drive.google.com/uc?export=download&id=1bgd3B6VtDtVv2ouqyM8wLy$
+unzip strix.operation.wise.zip
+cp -r /root/strix.operation.wise/. /var/www/strix.operation.wise.ita01.com
+a2ensite strix.operation.wise.ita01.com
+a2enmod rewrite
+service apache2 restart
+```
+[REVISI] Kemudian, kami juga menambahkan port 15000 dan 15500 sebagai port yang di-listen agar kita bisa mengakses melalui port tersebut. Konfigurasi port ini dimasukkan ke `/etc/apache2/ports.conf`
+```sh
+# If you just change the port or add more ports here, you will likely also
+# have to change the VirtualHost statement in
+# /etc/apache2/sites-enabled/000-default.conf
+
+Listen 80
+Listen 15000
+Listen 15500
+
+<IfModule ssl_module>
+        Listen 443
+</IfModule>
+
+<IfModule mod_gnutls.c>
+        Listen 443
+</IfModule>
+```
+
+## Kendala
+Saat mengerjakan sudah work, akan tetapi saat demo ternyata error karena kami lupa memasukan command untuk menambahkan port 15000 dan 15500 ke `ports.conf` 
+
+## Dokumentasi Soal 14
+- Testing `lynx strix.operation.wise.ita01.com:15000`
+![Hasil soal 14](images/14.1.png)
+![Hasil soal 14](images/14.2.png)
+- Testing `lynx strix.operation.wise.ita01.com:15500`
+![Hasil soal 14](images/14.3.png)
+![Hasil soal 14](images/14.4.png)
+
+# Soal 15
+Revisi - dengan autentikasi username Twilight dan password opStrix dan file di /var/www/strix.operation.wise.yyy
+## Analisa Soal
+Pada soal ini kami diperintahkan untuk mengkonfigurasi agar ```www.strix.operation.wise.ita01.com``` hanya bisa diakses apabila memiliki username dan password tertentu, yaitu username: Twilight dan Password: opStrix.
+
+## Pengerjaan Soal
+### Pada Server Eden
+Pertama, jalankan command berikut untuk menyimpan username dan password yang akan digunakan dalam autentikasi pada file `strix.operation.wise.ita01` pada folder `/var/www/`
+```sh
+htpasswd -c -b /var/www/strix.operation.wise.ita01 Twilight opStrix
+```
+Pada konfigurasi virtual host soal nomor 14, kami menambahkan konfigurasi autentikasi sehingga konfigurasi virtual host untuk `strix.operation.wise.ita01.com` adalah sebagai berikut.
+```sh
+<VirtualHost *:15000>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/strix.operation.wise.ita01.com
+        ServerName strix.operation.wise.ita01.com
+        ServerAlias www.strix.operation.wise.ita01.com
+        # no 15
+        <Directory \"/var/www/strix.operation.wise.ita01.com\">
+                AuthType Basic
+                AuthName \"Restricted Content\"
+                AuthUserFile /var/www/strix.operation.wise.ita01
+                Require valid-user
+        </Directory>
+
+        ErrorLog \${APACHE_LOG_DIR}/error.log
+        CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+<VirtualHost *:15500>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/strix.operation.wise.ita01.com
+        ServerName strix.operation.wise.ita01.com
+        ServerAlias www.strix.operation.wise.ita01.com
+        # no 15
+        <Directory \"/var/www/strix.operation.wise.ita01.com\">
+                AuthType Basic
+                AuthName \"Restricted Content\"
+                AuthUserFile /var/www/strix.operation.wise.ita01
+                Require valid-user
+        </Directory>
+
+        ErrorLog \${APACHE_LOG_DIR}/error.log
+        CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+## Kendala
+Pada saat pengerjaan sampai demo nomor 15 ini tidak work karena ternyata ada typo :). Typonya adalah pada path www dari `strix.operation.wise.ita01.com` yang awalnya adalah `/var/www.strix.operation.wise.ita01.com` dan yang seharusnya adalah `/var/www/strix.operation.wise.ita01.com`.
+
+## Dokumentasi Soal 15
+- Testing `lynx strix.operation.wise.ita01.com:15000`
+![Hasil soal 15](images/15.1.png)
+![Hasil soal 15](images/15.2.png)
+![Hasil soal 15](images/15.3.png)
+
+# Soal 16
+dan setiap kali mengakses IP Eden akan dialihkan secara otomatis ke www.wise.yyy.com
+## Analisa Soal
+Pada soal ini kami diperintahkan untuk mengkonfigurasi dimana setiap mengakses IP Eden `10.40.3.3` akan meredirect otomatis ke `wise.ita01.com`.
+
+## Pengerjaan Soal
+### Pada Server Eden
+Untuk menyelesaikan soal ini, kami melakukan konfigurasi dengan memasukan command `moved permanently` atau `http code 301`ke file `/etc/apache2/sites-available/000-default.conf`.
+```sh
+<VirtualHost *:80>
+        Redirect 301 / http://www.wise.ita01.com
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        ErrorLog \${APACHE_LOG_DIR}/error.log
+        CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+Jika dilihat ada command Redirect 301 yang artinya moved permanently ke `wise.ita01.com` dan setelah 301 ada tanda `/` yang mana itu menunjukan tujuan aslinya sebelum diredirect dimana tanda `/` saja berarti itu menunjukan home dari Eden atau bisa IP dari Eden.
+
+## Kendala
+Tidak ada kendala
+
+## Dokumentasi Soal 16
+- Testing `lynx strix.operation.wise.ita01.com:15000`
+![Hasil soal 16](images/16.1.png)
+![Hasil soal 15](images/16.2.png)
+![Hasil soal 15](images/16.3.png)
+
+# Soal 17
+Karena website www.eden.wise.yyy.com semakin banyak pengunjung dan banyak modifikasi sehingga banyak gambar-gambar yang random, maka Loid ingin mengubah request gambar yang memiliki substring `eden` akan diarahkan menuju eden.png. Bantulah Agent Twilight dan Organisasi WISE menjaga perdamaian!
+
+## Analisa Soal
+Pada soal ini kami diperintahkan untuk mengkonfigurasi dimana ketika ada request image yang memiliki substring `eden` maka secara otomatis diredirect ke `eden.png`.
+
+## Pengerjaan Soal
+### Pada Server Eden
+Pertama, kami memasukan rule baru (rewrite rule) ke dalam file `.htaccess` dengan path berikut `/var/www/super.franky.t12.com/.htaccess` agar nantinya bisa langsung redirect ke file `eden.png`
+```sh
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/public/images/eden.png$
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteRule ^(.*)eden(.*)$ /public/images/eden.png [R=301,L]
+```
+Jika dilihat pada baris keempat, itu mendeteksi apakah ada substring eden, jika ada maka langsung redirect ke `eden.png` secara otomatis.
+
+Kemudian, kami juga menambahkan script berikut pada konfigurasi virtual host dari `eden.wise.ita01.com`.
+```sh
+<Directory /var/www/eden.wise.ita01.com>
+        Options +FollowSymLinks -Multiviews
+        AllowOverride All
+</Directory>
+```
+Berikut adalah script full konfigurasi dari virtual host `eden.wise.ita01.com`
+```sh
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/eden.wise.ita01.com
+        ServerName eden.wise.ita01.com
+        ServerAlias www.eden.wise.ita01.com
+        # no 11
+        <Directory /var/www/eden.wise.ita01.com/public>
+                Options +Indexes
+        </Directory>
+
+        Alias "/public" "/var/www/eden.wise.ita01.com/public"
+
+        # no 13
+        Alias "/js" "/var/www/eden.wise.ita01.com/public/js"
+
+        # no 12
+        ErrorDocument 404 /error/404.html
+        ErrorDocument 500 /error/404.html
+        ErrorDocument 501 /error/404.html
+        ErrorDocument 502 /error/404.html
+        ErrorDocument 503 /error/404.html
+        ErrorDocument 504 /error/404.html
+
+        ErrorLog \${APACHE_LOG_DIR}/error.log
+        CustomLog \${APACHE_LOG_DIR}/access.log combined
+
+        # no 17
+        <Directory /var/www/eden.wise.ita01.com>
+                Options +FollowSymLinks -Multiviews
+                AllowOverride All
+        </Directory>
+</VirtualHost>
+```
+
+## Kendala
+Tidak ada kendala
+
+## Dokumentasi Soal 17
+- Testing `lynx eden.wise.ita01.com/edenlalala.png`
+![Hasil soal 17](images/17.1.png)
+![Hasil soal 17](images/17.2.png)
+![Hasil soal 17](images/17.3.png)
+![Hasil soal 17](images/17.4.png)
