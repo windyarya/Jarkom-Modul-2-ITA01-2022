@@ -78,10 +78,10 @@ service apache2 restart
 Tidak ada.
 
 ## Dokumentasi Soal 8
-- (```lynx wise.ita01.com```)<br>
+- ```lynx wise.ita01.com```<br>
 ![Hasil soal 8a](images/8a.png)<br>
-- Hasil Testing Soal 8
-![Hasil soal 8a](images/8a.png)
+- Hasil Testing Soal 8<br>
+![Hasil soal 8a](images/8.png)
 
 # Soal 9
 Setelah itu, Loid juga membutuhkan agar url ```www.wise.yyy.com/index.php/home``` dapat menjadi menjadi ```www.wise.yyy.com/home```.
@@ -101,9 +101,9 @@ Penggunaan Alias akan akan menerjemahkan direktori web ```/home``` menjadi ```/i
 Tidak Ada.
 
 ## Dokumentasi Soal 9
-- (```lynx wise.ita01.com/home```)<br>
+- ```lynx wise.ita01.com/home```<br>
 ![Hasil soal 9a](images/9a.png)<br>
-- Hasil Testing Soal 9 
+- Hasil Testing Soal 9 <br>
 ![Hasil soal 9](images/9.png)
 
 # Soal 10
@@ -141,9 +141,9 @@ service apache2 restart
 Tidak ada.
 
 ## Dokumentasi Soal 10
--(```lynx eden.wise.ita01.com ```)<br>
+-```lynx eden.wise.ita01.com ```<br>
 ![Hasil soal 10a](images/10a.png)<br>
-- Hasil Testing Soal 10 
+- Hasil Testing Soal 10 <br>
 ![Hasil soal 10](images/10.png)
 
 # Soal 11
@@ -165,9 +165,9 @@ Alias "/public" "/var/www/eden.wise.ita01.com/public"
 Tidak ada.
 
 ## Dokumentasi Soal 11
-- (```lynx eden.wise.ita01.com/public```)<br>
+- ```lynx eden.wise.ita01.com/public```<br>
 ![Hasil soal 11a](images/11a.png)<br>
-- Hasil Testing Soal 11 
+- Hasil Testing Soal 11 <br>
 ![Hasil soal 11](images/11.png)
 
 
@@ -197,9 +197,9 @@ Dan dilakukan restart apache menggunakan command ```service apache2 restart```.
 Tidak ada.
 
 ## Dokumentasi Soal 12
-- (```lynx eden.wise.ita01.com/hahaha```)<br>
+- ```lynx eden.wise.ita01.com/hahaha```<br>
 ![Hasil soal 12a](images/12a.png)<br>
-- Hasil Testing Soal 12 
+- Hasil Testing Soal 12 <br>
 ![Hasil soal 12](images/12.png)
 
 # Soal 13
@@ -219,7 +219,7 @@ Penggunaan Alias akan akan menerjemahkan direktori web ```/js``` menjadi ```/pub
 Tidak ada.
 
 ## Dokumentasi Soal 13
-- (```lynx eden.wise.ita01.com/js```)<br>
+- ```lynx eden.wise.ita01.com/js```<br>
 ![Hasil soal 13a](images/13a.png)<br>
-- Hasil Testing Soal 13 
+- Hasil Testing Soal 13 <br>
 ![Hasil soal 13](images/13.png)
