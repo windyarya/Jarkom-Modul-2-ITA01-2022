@@ -149,8 +149,8 @@ Pada soal ini kami diminta membuat DirectoryListing pada /public.
 Kami menambahkan konfigurasi pada file ```/etc/apache2/sites-available/eden.wise.ita01.com.conf``` agar dapat membuat directory listing sebagai berikut.
 ```sh
 <Directory /var/www/eden.wise.ita01.com/public>
-                Options +Indexes
-        </Directory>
+      Options +Indexes
+</Directory>
 
 Alias "/public" "/var/www/eden.wise.ita01.com/public"
 ```
@@ -173,14 +173,14 @@ Kami menambahkan konfigurasi dalam file ```/etc/apache2/sites-available/eden.wis
 ```sh
 #no 11
 <Directory /var/www/eden.wise.ita01.com/public>
-                Options +Indexes
-        </Directory>
+      Options +Indexes
+</Directory>
 
 ErrorDocument 404 /error/404.html
-        ErrorDocument 500 /error/404.html
-        ErrorDocument 502 /error/404.html
-        ErrorDocument 503 /error/404.html
-        ErrorDocument 504 /error/404.html
+ErrorDocument 500 /error/404.html
+ErrorDocument 502 /error/404.html
+ErrorDocument 503 /error/404.html
+ErrorDocument 504 /error/404.html
 ```
 
 Dan dilakukan restart apache menggunakan command ```service apache2 restart```.
